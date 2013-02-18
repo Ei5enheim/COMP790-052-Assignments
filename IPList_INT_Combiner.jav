@@ -42,36 +42,36 @@ public class IPList
         }
     } 
 
-    public static class IPCountCombiner extends Reducer <Text, LongWritable,
-                                                        Text, LongWritable>
-    {
-        @Override
-        public void reduce (Text inputKey, Iterable<LongWritable> values, Context output)
-                            throws IOException, InterruptedException
-        {
-            long count = 0;
-
-            for (LongWritable value: values) {
-                count += value.get();
-            }
-            output.write(inputKey, new LongWritable(count));
-        }
-    }
-
-
-    public static class IPCountReducer extends Reducer <Text, IntWritable,
-                                                        Text, LongWritable>
+    public static class IPCountCombiner extends Reducer <Text, IntWritable,
+                                                        Text, IntWritable>
     {
         @Override
         public void reduce (Text inputKey, Iterable<IntWritable> values, Context output)
                             throws IOException, InterruptedException
         {
-            long count = 0;
+            int count = 0;
 
             for (IntWritable value: values) {
                 count += value.get();
             }
-            output.write(inputKey, new LongWritable(count));
+            output.write(inputKey, new IntWritable(count));
+        }
+    }
+
+
+    public static class IPCountReducer extends Reducer <Text, IntWritable,
+                                                        Text, IntWritable>
+    {
+        @Override
+        public void reduce (Text inputKey, Iterable<IntWritable> values, Context output)
+                            throws IOException, InterruptedException
+        {
+            int count = 0;
+
+            for (IntWritable value: values) {
+                count += value.get();
+            }
+            output.write(inputKey, new IntWritable(count));
         }
     }
 
